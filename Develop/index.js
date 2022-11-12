@@ -4,6 +4,7 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
+const util = require('util');
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
@@ -63,6 +64,79 @@ function startQuestions() {
     })
 }
 
+function engineerQuestions() {
+    inquirer.prompt([{
+      type: "input",
+      name: "nameEmployee",
+      message: "Enter the employee's name: "
+    }, {
+      type: "input",
+      name: "idEmployee",
+      message: "Enter the employee's ID number: "
+    }, {
+      type: "input",
+      name: "emailEmployee",
+      message: "Enter the employee's email address: "
+    }, {
+      type: "input",
+      name: "gitusernameEngineer",
+      message: "Enter the employee's github username: ",
+      // when: (answers) => answers.role === 'Engineer'
+    }, {
+      type: "list",
+      name: "another",
+      message: "Would you like to add another member?",
+      choices: [
+        "Engineer",
+        "Intern",
+        "No"
+      ]
+    }]).then(function (data) {
+      console.log("you entered engineer questions");
+      switch (data.another) {
+        case "Engineer":
+          engineerQuestions();
+          break;
+        case "Intern":
+          internQuestions()
+      }
+      // renderHtml();
+    })
+  }
+  
+  function internQuestions() {
+    inquirer.prompt([{
+        type: "input",
+        name: "nameEmployee",
+        message: "Enter employee's name:"
+      }, {
+        type: "input",
+        name: "idEmployee",
+        message: "Enter employee ID number: "
+      }, {
+        type: "input",
+        name: "emailEmployee",
+        message: "Enter employee email address: "
+      }, {
+        type: "input",
+        name: "schoolIntern",
+        message: "Enter school intern attends: ",
+        // when: (answers) => answers.role === 'Intern'
+      }, {
+        type: "confirm",
+        name: "another",
+        message: "Enter another team member?",
+        choices: ['Yes', 'No']
+      }])
+      .then(function (data) {
+        if (data.choices === 'Yes') {
+          startQuestions();
+        } else {
+          renderHtml();
+        }
+  
+      })
+  }
 
     // function startQuestions() {
     //     inquirer.prompt([
