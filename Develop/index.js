@@ -62,6 +62,8 @@ function startQuestions() {
                 break;
             case 'Intern':
                 internQuestions();
+            default:
+              renderHtml();
         }
     })
 }
@@ -102,6 +104,8 @@ function engineerQuestions() {
           break;
         case "Intern":
           internQuestions()
+        default:
+          renderHtml();
       }
       // renderHtml();
     })
@@ -142,12 +146,16 @@ function engineerQuestions() {
             engineerQuestions();
             case 'Intern':
               internQuestions();
+            default:
+              renderHtml();
         }
   
       })
   }
 
-  
+  function renderHtml() {
+    fs.writeFileSync(outputPath, render(employees), "utf-8")
+  }
 
     // function startQuestions() {
     //     inquirer.prompt([
