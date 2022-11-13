@@ -10,7 +10,7 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-const employeeData = []
+const employees = []
 
 startQuestions();
 
@@ -33,9 +33,14 @@ function startQuestions() {
         message:"Enter the employee's email address: "
     },
     {
-        type:'input',
+        type:'list',
         name:'roleEmployee',
         message:"Specific the employee's role: ",
+        choices: [
+          'Manager',
+          'Engineer',
+          'Intern',
+        ]
     },
     {
         type:'input',
@@ -53,6 +58,7 @@ function startQuestions() {
         ]
     }]).then(function(data) {
       let manager = new Manager(data.nameEmployee, data.idEmployee, data.emailEmployee, data.managerNumber);
+
       employees.push(manager);
         // console.log(data);
         // addEmployee = true;
@@ -107,7 +113,6 @@ function engineerQuestions() {
         default:
           renderHtml();
       }
-      // renderHtml();
     })
   }
   
@@ -129,7 +134,7 @@ function engineerQuestions() {
         name: "schoolIntern",
         message: "Enter attened school: ",
       }, {
-        type: "list",
+      type: "list",
       name: "another",
       message: "Would you like to add another member?",
       choices: [
