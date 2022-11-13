@@ -8,5 +8,7 @@
     Implement command line "node index.js" to start this application
 
 ## Mock Up
-
+<img src="1.png">
+Below is the output.
+<img src="2.png">
 
